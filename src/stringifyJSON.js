@@ -37,12 +37,11 @@ var stringifyJSON = function(obj) {
   	if (obj === null){ return "null"; }
   	var result = "{";
   	for(var key in obj){
-  		if ( typeof(obj[key]) === "undefined" || typeof(obj[key]) === "function"){
-  			return;
-  		}
-  		var keyVal = "\"".concat(String(key),"\":");
-  		var val  = stringifyJSON(obj[key]);
-  		result = result.concat(keyVal, val, ",");
+  		if ( typeof(obj[key]) !== "undefined" && typeof(obj[key]) !== "function"){
+    		var keyVal = "\"".concat(String(key),"\":");
+    		var val  = stringifyJSON(obj[key]);
+    		result = result.concat(keyVal, val, ",");
+      }
   	}
   	if(result === "{") { result += "}"; }
   	result = result.slice(0,-1).concat("}");
